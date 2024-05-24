@@ -36,7 +36,7 @@
 </head>
 <body>
      <!-- navbar -->
-     <header class="w-[100%] flex items-center z-10" style="background-color: #189ab4;">
+     <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center justify-between relative  w-full">
             <div class="px-4">
                 <h1 class="font-bold text-2xl text-white  block py-5"><a href="">Book Shop</a></h1>
