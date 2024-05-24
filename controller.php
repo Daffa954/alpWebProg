@@ -92,7 +92,7 @@ function upload()
     $newFileName = $newFileName .'.'.$getExtension;
 
     // Lolos pengecekan, gambar siap di upload
-    if (move_uploaded_file($_FILES['photo']['tmp_name'], 'image/' . $newFileName)) {
+    if (move_uploaded_file($tmpname, 'image/' . $newFileName)) {
        
         return 'image/' .$newFileName;
     } else {
@@ -101,7 +101,5 @@ function upload()
     }
 }
 
-function getEror() {
-    echo"alpha";
-}
+
 ?>
