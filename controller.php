@@ -4,7 +4,7 @@ function bukaKonesi()
     $host = 'localhost';
     $user = 'root';
     $pwd = '';
-    $db = 'bookstore';
+    $db = 'our_food';
 
     $conn = mysqli_connect($host, $user, $pwd, $db) or die("Koneksi ke database gagal: " . mysqli_connect_error());
     return $conn;
