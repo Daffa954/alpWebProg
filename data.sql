@@ -6,7 +6,6 @@ CREATE TABLE `user` (
     `no_telp` VARCHAR(20),
     `saldo` INT,
     `photo` VARCHAR(250),
-    `role` INT NOT NULL,
     PRIMARY KEY (`id_user`)
 ) ENGINE = InnoDB;
 
