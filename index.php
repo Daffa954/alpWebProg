@@ -35,6 +35,7 @@
     <title>Document</title>
 </head>
 <body>
+    <p>coba</p>
      <!-- navbar -->
      <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center justify-between relative  w-full">
