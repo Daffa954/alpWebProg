@@ -64,6 +64,21 @@
         </div>
     </header>
     <!-- navbar -->
-<p>aa</p>
+
+    <script>
+         $('#hamburger').click(function () {
+            $('#hamburger').toggleClass('active');
+            $("#nav-menu").toggleClass('hidden')
+        })
+
+        $(window).scroll((function () {
+            const fixedNav = document.querySelector('header').offsetTop;
+            if (window.pageYOffset > fixedNav) {
+                document.querySelector('header').classList.add("nav-fix")
+            } else {
+                document.querySelector('header').classList.remove("nav-fix")
+            }
+        }))
+    </script>
 </body>
 </html> 
