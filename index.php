@@ -43,7 +43,7 @@ session_start();
     <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full z-10 gap-10">
             <div class="flex flex-row gap-5">
-                <div class="flex items-center px-4 bg-blue-200">
+                <div class="flex items-center px-4">
                     <div class="w-10 h-10  p-1.5 flex flex-col justify-around rounded z-40" id="hamburger">
                         <div class="bg-white h-1 w-full transition duration-300 origin-top-left"></div>
                         <div class="bg-white h-1 w-full transition duration-300"></div>
@@ -51,7 +51,7 @@ session_start();
                     </div>
                 </div>
 
-                <div class="bg-blue-200 w-[60%]">
+                <div class="w-[60%]">
                     <h1 class="font-bold text-2xl text-white  block py-5"><a href="">OurFood</a></h1>
                 </div>
             </div>
@@ -71,7 +71,7 @@ session_start();
 
             <div class="bg-blue-200 px-8">
                 <?php if (isset($_SESSION['email'])) { ?>
-                    
+
                 <?php } else { ?>
                     <div>
                         <a href="">sign in</a>/<a href="">sign up</a>
@@ -82,8 +82,8 @@ session_start();
         </div>
     </header>
     <!-- navbar -->
-    <div class="p-4 w-full">
-        <form class="w-[45%]">
+    <div class="p-4 w-full flex justify-end">
+        <form class="md:w-[45%] w-full">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -95,7 +95,7 @@ session_start();
                     </svg>
                 </div>
                 <input type="search" id="default-search"
-                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search Mockups, Logos..." required />
                 <button type="submit"
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
@@ -103,6 +103,90 @@ session_start();
         </form>
     </div>
 
+    <!-- carousel -->
+    <div class="p-4 w-full">
+        <div id="animation-carousel" class="relative w-full rounded-lg" data-carousel="static">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden rounded-lg md:h-96 h-80">
+                <!-- Item 1 -->
+                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                    <img src="image1.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                    <img src="image1.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-200 ease-linear" data-carousel-item="active">
+                    <img src="image1.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 4 -->
+                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                    <img src="image1.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+                <!-- Item 5 -->
+                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                    <img src="image1.jpg"
+                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+            </div>
+            <!-- Slider controls -->
+            <button type="button"
+                class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-prev>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button"
+                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-next>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
+    </div>
+    <!-- carousel -->
+
+    <div class="p-4 bg-blue-200 w-full">
+        <div>
+            <h1 class="font-bold text-3xl">Our Favorite Food</h1>
+        </div>
+        <div class="w-full flex gap-10 overflow-x-auto">
+            <?php for ($i = 0; $i < 5; $i++) { ?>
+                <div class="card bg-white p-2 rounded-lg w-[400px]" style="border: 2px solid black">
+                    <img src="" class="m-auto w-full h-[250px]" style="border: 1px solid black">
+                    <div class="mt-2 flex flex-col justify-center items-center">
+                        <h2 class="text-xl font-bold m-auto">menu</h2>
+                        <a href="" target="blank">see details</a>
+                    </div>
+                    <div class="mt-2 flex flex-col justify-center items-center">
+                        <button class="bg-yellow-300 w-1/2"><a href=""
+                                onclick="return confirm('yakin?')">Update</a></button><br>
+                        <button class="bg-red-500 w-1/2"><a href=""
+                                onclick="return confirm('yakin?')">delete</a></button>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
     <script>
         $('#hamburger').click(function () {
             $('#hamburger').toggleClass('active');
