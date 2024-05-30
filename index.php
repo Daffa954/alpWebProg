@@ -1,4 +1,6 @@
-<?php?>
+<?php
+    include ("controller.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,12 +37,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p>coba</p>
      <!-- navbar -->
      <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center justify-between relative  w-full">
             <div class="px-4">
-                <h1 class="font-bold text-2xl text-white  block py-5"><a href="">Book Shop</a></h1>
+                <h1 class="font-bold text-2xl text-white  block py-5"><a href="">Food Shop</a></h1>
             </div>
             <div id="nav-menu"
                 class="hidden py-5 absolute shadow-lg bg-[#189AB4] z-30 w-[250px] right-0 top-0 h-[100vh] lg:h-full lg:bg-transparent lg:shadow-none lg:block lg:static lg:w-4/6">
@@ -48,8 +49,7 @@
                     <li class="group"><a href="home.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
                     <li class="group"><a href="add.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
-                            add book</a>
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Food/Drink</a>
                     </li>
                    
                 </ul>
@@ -65,6 +65,27 @@
         </div>
     </header>
     <!-- navbar -->
-<p>aa</p>
+    
+    <!-- HOME -->
+    <div>
+        <?php
+         $allProducts = getAllBooks();
+        for ($i=0; $i <count($allProducts) ; $i++) { 
+            # code...
+        }
+           
+            foreach ($allProducts as $product) {
+                foreach($product as $x){
+                    echo $x[0];
+                }
+                ?><img src='<?= $x ?>'>
+                    <?php
+                // echo $product[0];
+                echo "<br>";
+            }
+            
+        ?>
+    </div>
+    <!-- HOME -->
 </body>
 </html> 

@@ -1,4 +1,5 @@
 <?php
+    session_start();
 function bukaKonesi()
 {
     $host = 'localhost';
@@ -17,7 +18,7 @@ function tutupKoneksi($conn)
 
 function getAllBooks()
 {
-    $sql = "SELECT * FROM buku";
+    $sql = "SELECT * FROM produk";
     $conn = bukaKonesi();
     $result = mysqli_query($conn, $sql);
     $rows = [];
@@ -30,7 +31,7 @@ function getAllBooks()
 
 function seeDetails($id)
 {
-    $sql = "SELECT * FROM buku WHERE id = $id";
+    $sql = "SELECT * FROM produk WHERE id = $id";
     $conn = bukaKonesi();
     $book = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($book);
