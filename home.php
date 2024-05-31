@@ -55,7 +55,7 @@ session_start();
                         <div class="bg-white h-1 w-full transition duration-300 origin-bottom-left"></div>
                     </div>
                 </div>
-                
+
                 <div class="">
                     <h1 class="font-bold text-2xl text-white  block py-5"><a href="">OurFood</a></h1>
                 </div>
@@ -124,27 +124,27 @@ session_start();
             <div class="relative h-56 overflow-hidden rounded-lg md:h-[500px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="carousel/image1.jpeg"
+                    <img src="carousel/image1-min.jpeg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel/image2.jpg"
+                    <img src="carousel/image2-min.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel/image3.jpg"
+                    <img src="carousel/image3-min.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 4 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel/image4.jpg"
+                    <img src="carousel/image4-min.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 5 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel/image5.jpg"
+                    <img src="carousel/image5-min.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
             </div>
