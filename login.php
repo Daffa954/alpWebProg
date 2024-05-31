@@ -1,7 +1,26 @@
 <?php
 require "controller.php";
 session_start();
-$user = login($_POST);
+
+if(isset($_POST['submit'])) {
+    $user = login($_POST);
+    var_dump($user);
+    if($user != null) {
+        $_SESSION['user'] = $user;
+        if($user['role'] == 'customer') {
+        echo " <script>
+        alert('login berhasil');
+        document.location.href = 'home.php';
+        </script>";
+        }elseif ($user['role'] == 'admin') {
+            # code...
+            echo " <script>
+            alert('login berhasil');
+            document.location.href = 'admin.php';
+            </script>";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>

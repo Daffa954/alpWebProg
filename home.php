@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +55,7 @@ session_start();
                         <div class="bg-white h-1 w-full transition duration-300 origin-bottom-left"></div>
                     </div>
                 </div>
-
+                
                 <div class="">
                     <h1 class="font-bold text-2xl text-white  block py-5"><a href="">OurFood</a></h1>
                 </div>
@@ -67,18 +66,18 @@ session_start();
                 <ul class="items-center h-full flex flex-col justify-around">
                     <li class="group"><a href="home.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
-                    <li class="group"><a href="add.php"
+                    <li class="group"><a href="profile.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
-                            add book</a>
+                            profile</a>
                     </li>
 
                 </ul>
             </div>
 
             <div class="" style="padding-right:20px">
-                <?php if (isset($_SESSION['email'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
-                        <h2>Hello, daffa</h2>
+                        <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
                             class="bi bi-person-fill" viewBox="0 0 16 16">
