@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_GET['logout'])) {
+if (isset($_GET['logout'])) {
     session_destroy();
     echo "<script>
     alert('logout berhasil');
@@ -10,6 +10,7 @@ if(isset($_GET['logout'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,8 +48,9 @@ if(isset($_GET['logout'])) {
     </style>
     <title>Document</title>
 </head>
+
 <body>
-<header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
+    <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
                 <div class="flex items-center">
@@ -74,11 +76,11 @@ if(isset($_GET['logout'])) {
                     </li>
                     <li class="group"><a href="AddMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
-                            </a>
+                        </a>
                     </li>
                     <li class="group"><a href="profile.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Profile
-                            </a>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -87,14 +89,14 @@ if(isset($_GET['logout'])) {
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
                         <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
-                            class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
+                                class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
                     </div>
-                    </div>
-                    
+
                 <?php } else { ?>
                     <div>
                         <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
@@ -104,27 +106,43 @@ if(isset($_GET['logout'])) {
 
         </div>
     </header>
-    
-    <div class="p-4 bg-red-200 w-full flex gap-10 flex-wrap">
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] h-32 w-full flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah order hari ini : </p>
-        </div>
 
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah menu yang terjual hari ini : </p>
-        </div>
 
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Stok hari ini : </p>
-        </div>
 
-    </div>
-       
     <!-- list order -->
-    <div class="p-4 bg-red-200 mt-2">
-                    <h2>Order hari ini</h2>
+    <div class="p-4 bg-red-200" >
+
+
+        <form class="p-4 bg-white lg:w-1/2 w-full m-auto rounded-xl" style="border: 3px solid #ffd700">
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your
+                    email</label>
+                <input type="email" id="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder="name@flowbite.com" required />
+            </div>
+            <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your
+                    password</label>
+                <input type="password" id="password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    required />
+            </div>
+            <div class="flex items-start mb-5">
+                <div class="flex items-center h-5">
+                    <input id="remember" type="checkbox" value=""
+                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                        required />
+                </div>
+                <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember
+                    me</label>
+            </div>
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
+
     </div>
-        <!-- list order -->
+    <!-- list order -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
@@ -143,4 +161,5 @@ if(isset($_GET['logout'])) {
         });
     </script>
 </body>
+
 </html>

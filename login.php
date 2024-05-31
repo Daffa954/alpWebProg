@@ -4,7 +4,6 @@ session_start();
 
 if(isset($_POST['submit'])) {
     $user = login($_POST);
-    var_dump($user);
     if($user != null) {
         $_SESSION['user'] = $user;
         if($user['role'] == 'customer') {
