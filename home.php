@@ -1,5 +1,10 @@
 <?php
 session_start();
+if($_SESSION['user']['role'] == 'admin') {
+    echo "<script>
+    document.location.href = 'admin.php';
+    </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +74,10 @@ session_start();
                     <li class="group"><a href="profile.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             profile</a>
+                    </li>
+                    <li class="group"><a href="order.php"
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
+                            Order</a>
                     </li>
 
                 </ul>
