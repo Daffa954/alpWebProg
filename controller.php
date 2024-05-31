@@ -89,17 +89,46 @@ function upload()
     }
     //generate nama baru
     $newFileName = uniqid();
-    $newFileName = $newFileName .'.'.$getExtension;
+    $newFileName = $newFileName . '.' . $getExtension;
 
     // Lolos pengecekan, gambar siap di upload
     if (move_uploaded_file($tmpname, 'image/' . $newFileName)) {
-       
-        return 'image/' .$newFileName;
+
+        return 'image/' . $newFileName;
     } else {
         echo "error";
         return $_FILES["photo"]["name"];
     }
 }
 
+function register($data)
+{
+    $conn = bukaKonesi();
+    $nama = htmlspecialchars($data['nama']);
+    $email = htmlspecialchars($data['email']);
+    $password = htmlspecialchars($data['password']);
+
+    $sql = "INSERT INTO user (id_user,nama, email, password) VALUES (NULL, '$nama', '$email', '$password')";
+    if (mysqli_query($conn, $sql)) {
+        echo " <script>
+        alert('data berhasil ditambah');
+        document.location.href = 'home.php';
+        </script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    tutupKoneksi($conn);
+}
+
+function login($data) {
+    $conn = bukaKonesi();
+    $email = htmlspecialchars($data['email']);
+    $password = htmlspecialchars($data['password']);
+    $sql = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $user = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($user);
+    tutupKoneksi($conn);
+    return $row;
+}
 
 ?>

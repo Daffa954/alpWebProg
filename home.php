@@ -89,7 +89,7 @@ session_start();
                     
                 <?php } else { ?>
                     <div>
-                        <a href="">sign in</a>/<a href="">sign up</a>
+                        <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
                     </div>
                 <?php } ?>
             </div>
@@ -125,27 +125,27 @@ session_start();
             <div class="relative h-56 overflow-hidden rounded-lg md:h-[500px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="image1.jpeg"
+                    <img src="carousel/image1.jpeg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="image2.jpg"
+                    <img src="carousel/image2.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="image3.jpg"
+                    <img src="carousel/image3.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 4 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="image4.jpg"
+                    <img src="carousel/image4.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
                 <!-- Item 5 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="image5.jpg"
+                    <img src="carousel/image5.jpg"
                         class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 </div>
             </div>
