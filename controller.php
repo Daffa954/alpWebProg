@@ -108,6 +108,17 @@ function register($data)
     $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
 
+    $checkEmail= "SELECT email from user WHERE email = '$email'";
+    $checking = mysqli_query($conn, $checkEmail);
+    $row = mysqli_fetch_assoc($checking);
+
+    if($row != null) {
+        echo " <script>
+        alert('email sudah digunakan');
+        document.location.href = 'register.php';
+        </script>";
+        return false;
+    }
     $sql = "INSERT INTO user (id_user,nama, email, password) VALUES (NULL, '$nama', '$email', '$password')";
     if (mysqli_query($conn, $sql)) {
         echo " <script>
