@@ -38,19 +38,21 @@ function seeDetails($id)
     return $row;
 }
 
-function addBooks($data)
+function addProduk($data)
 {
     $conn = bukaKonesi();
-    $title = htmlspecialchars($data['title']);
-    $description = htmlspecialchars($data['description']);
+    $nama = htmlspecialchars($data['nama']);
+    $deskripsi = htmlspecialchars($data['deskripsi']);
+    $kategori =  htmlspecialchars($data['kategori']);
+    $jumlah =  htmlspecialchars($data['jumlah']);
+    $harga =  htmlspecialchars($data['harga']);
 
     // Upload gambar
     $photo = upload();
     if (!$photo) {
         return false;
     }
-
-    $sql = "INSERT INTO buku (id, category_id, title, description, author, nidn, photo) VALUES (NULL, NULL, '$title', '$description', NULL, NULL, '$photo')";
+    $sql = "INSERT INTO produk (id_produk, nama, deskripsi, kategori, jumlah, harga, photo) VALUES (NULL,'$nama', '$deskripsi', '$kategori', '$jumlah', '$harga', '$photo')";
     if (mysqli_query($conn, $sql)) {
         echo "Data berhasil ditambahkan";
     } else {
@@ -77,24 +79,23 @@ function upload()
     $fileExtension = ['jpg', 'jpeg', 'png', 'gif'];
     $getExtension = explode('.', $filename);
     $getExtension = strtolower(end($getExtension));
+    var_dump($getExtension);
     if (!in_array($getExtension, $fileExtension)) {
         echo "<script>alert('Yang anda pilih bukan gambar')</script>";
         return false;
     }
-
     // cek jika ukuran nya besar
     if ($filesize >= 1000000) { // 1MB
         echo "<script>alert('Ukuran terlalu besar')</script>";
+        
         return false;
     }
-    //generate nama baru
-    $newFileName = uniqid();
-    $newFileName = $newFileName . '.' . $getExtension;
+    
+    
 
     // Lolos pengecekan, gambar siap di upload
-    if (move_uploaded_file($tmpname, 'image/' . $newFileName)) {
-
-        return 'image/' . $newFileName;
+    if (move_uploaded_file($tmpname, 'image/' .$filename)) {
+        return 'image/' . $filename;
     } else {
         echo "error";
         return $_FILES["photo"]["name"];
