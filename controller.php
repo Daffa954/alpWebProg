@@ -28,24 +28,16 @@ function getAllBooks()
     return $rows;
 }
 
-function seeDetails($id)
-{
-    $sql = "SELECT * FROM buku WHERE id = $id";
-    $conn = bukaKonesi();
-    $book = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($book);
-    tutupKoneksi($conn);
-    return $row;
-}
+
 
 function addProduk($data)
 {
     $conn = bukaKonesi();
     $nama = htmlspecialchars($data['nama']);
     $deskripsi = htmlspecialchars($data['deskripsi']);
-    $kategori =  htmlspecialchars($data['kategori']);
-    $jumlah =  htmlspecialchars($data['jumlah']);
-    $harga =  htmlspecialchars($data['harga']);
+    $kategori = htmlspecialchars($data['kategori']);
+    $jumlah = htmlspecialchars($data['jumlah']);
+    $harga = htmlspecialchars($data['harga']);
 
     // Upload gambar
     $photo = upload();
@@ -79,7 +71,6 @@ function upload()
     $fileExtension = ['jpg', 'jpeg', 'png', 'gif'];
     $getExtension = explode('.', $filename);
     $getExtension = strtolower(end($getExtension));
-    var_dump($getExtension);
     if (!in_array($getExtension, $fileExtension)) {
         echo "<script>alert('Yang anda pilih bukan gambar')</script>";
         return false;
@@ -87,15 +78,16 @@ function upload()
     // cek jika ukuran nya besar
     if ($filesize >= 1000000) { // 1MB
         echo "<script>alert('Ukuran terlalu besar')</script>";
-        
+
         return false;
     }
-    
-    
 
+
+    $newFileName = uniqid();
+    $newFileName = $newFileName . '.' . $getExtension;
     // Lolos pengecekan, gambar siap di upload
-    if (move_uploaded_file($tmpname, 'image/' .$filename)) {
-        return 'image/' . $filename;
+    if (move_uploaded_file($tmpname, 'image/' . $newFileName)) {
+        return 'image/' . $newFileName;
     } else {
         echo "error";
         return $_FILES["photo"]["name"];
@@ -109,11 +101,11 @@ function register($data)
     $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
 
-    $checkEmail= "SELECT email from user WHERE email = '$email'";
+    $checkEmail = "SELECT email from user WHERE email = '$email'";
     $checking = mysqli_query($conn, $checkEmail);
     $row = mysqli_fetch_assoc($checking);
 
-    if($row != null) {
+    if ($row != null) {
         echo " <script>
         alert('email sudah digunakan');
         document.location.href = 'register.php';
@@ -132,7 +124,8 @@ function register($data)
     tutupKoneksi($conn);
 }
 
-function login($data) {
+function login($data)
+{
     $conn = bukaKonesi();
     $email = htmlspecialchars($data['email']);
     $password = htmlspecialchars($data['password']);
@@ -142,5 +135,26 @@ function login($data) {
     tutupKoneksi($conn);
     return $row;
 }
+
+
+function seeStock()
+{
+    $conn = bukaKonesi();
+
+    $sql = "SELECT SUM(jumlah) AS total FROM produk";
+    $sumStock = mysqli_query($conn, $sql);
+
+    if (!$sumStock) {
+        // Menangani kesalahan query
+        echo "Error: " . mysqli_error($conn);
+        tutupKoneksi($conn);
+        return null;
+    }
+
+    $result = mysqli_fetch_assoc($sumStock);
+    tutupKoneksi($conn);
+    return $result;
+}
+
 
 ?>

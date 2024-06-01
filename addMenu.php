@@ -8,7 +8,6 @@ if (isset($_GET['logout'])) {
     document.location.href = 'home.php';
     </script>";
 }
-var_dump($_FILES);
 addProduk($_POST);
 ?>
 <!DOCTYPE html>
@@ -131,8 +130,8 @@ addProduk($_POST);
             </div>
             <div class="mb-5">
 
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
-                <select id="countries"
+                <label for="kategori" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
+                <select id="kategori" name="kategori"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option selected>pilih kategori</option>
                     <option value="makanan">makanan</option>

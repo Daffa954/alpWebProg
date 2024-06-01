@@ -1,15 +1,19 @@
 <?php
+require "controller.php";
 session_start();
-if(isset($_GET['logout'])) {
+
+if (isset($_GET['logout'])) {
     session_destroy();
     echo "<script>
     alert('logout berhasil');
     document.location.href = 'home.php';
     </script>";
 }
+$total = seeStock();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,8 +51,9 @@ if(isset($_GET['logout'])) {
     </style>
     <title>Document</title>
 </head>
+
 <body>
-<header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
+    <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
                 <div class="flex items-center">
@@ -74,11 +79,11 @@ if(isset($_GET['logout'])) {
                     </li>
                     <li class="group"><a href="AddMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
-                            </a>
+                        </a>
                     </li>
                     <li class="group"><a href="profile.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Profile
-                            </a>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -87,14 +92,14 @@ if(isset($_GET['logout'])) {
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
                         <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
-                            class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
+                                class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
                     </div>
-                    </div>
-                    
+
                 <?php } else { ?>
                     <div>
                         <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
@@ -104,7 +109,7 @@ if(isset($_GET['logout'])) {
 
         </div>
     </header>
-    
+
     <div class="p-4 bg-red-200 w-full flex gap-10 flex-wrap">
         <div class="p-2 bg-white rounded-xl lg:w-[30%] h-32 w-full flex items-center" style="border: 3px solid #27742d">
             <p class="text-xl font-semibold">Jumlah order hari ini : </p>
@@ -115,16 +120,16 @@ if(isset($_GET['logout'])) {
         </div>
 
         <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Stok hari ini : </p>
+            <p class="text-xl font-semibold">Stok hari ini : <?php echo $total['total'] ?> </p>
         </div>
 
     </div>
-       
+
     <!-- list order -->
     <div class="p-4 bg-red-200 mt-2">
-                    <h2>Order hari ini</h2>
+        <h2>Order hari ini</h2>
     </div>
-        <!-- list order -->
+    <!-- list order -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
@@ -143,4 +148,5 @@ if(isset($_GET['logout'])) {
         });
     </script>
 </body>
+
 </html>
