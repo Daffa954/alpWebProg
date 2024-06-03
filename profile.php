@@ -125,11 +125,7 @@ if (isset($_POST['logout'])) {
                     <td> : </td>
                     <td><?php echo $_SESSION['user']['email']?></td>
                 </tr>
-                <tr>
-                    <td>Password</td>
-                    <td> : </td>
-                    <td><?php echo $_SESSION['user']['password']?></td>
-                </tr>
+                
             </table>
         </div>
     </div>

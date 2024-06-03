@@ -15,10 +15,11 @@ function tutupKoneksi($conn)
     mysqli_close($conn);
 }
 
-function getProduct($id) {
+function getProduct($id)
+{
     $sql = "SELECT * FROM produk WHERE id_produk = $id";
     $conn = bukaKonesi();
-    $product= mysqli_query($conn, $sql);
+    $product = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($product);
     tutupKoneksi($conn);
     return $row;
@@ -173,7 +174,7 @@ function seeStock()
 
 function rubah($data, $id)
 {
-   
+
     $conn = bukaKonesi();
     $nama = htmlspecialchars($data["nama"]);
     $deskripsi = htmlspecialchars($data["deskripsi"]);
@@ -205,7 +206,7 @@ function rubah($data, $id)
     mysqli_close($conn);
 }
 
-function delete($id)
+function deleteProduct($id)
 {
     $conn = bukaKonesi();
 
@@ -229,5 +230,16 @@ function delete($id)
     return $affectedRows;
 }
 
-
+function getAllFoods()
+{
+    $conn = bukaKonesi();
+    $sql = "SELECT * FROM produk WHERE kategori = 'makanan'";
+    $rows = [];
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
 ?>

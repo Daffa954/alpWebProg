@@ -1,10 +1,13 @@
 <?php
 session_start();
+require "controller.php";
 if ($_SESSION['user']['role'] == 'admin') {
     echo "<script>
     document.location.href = 'admin.php';
     </script>";
 }
+$foods = getAllFoods();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,8 +212,9 @@ if ($_SESSION['user']['role'] == 'admin') {
             <?php for ($i = 0; $i < 5; $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
-                    <img src="path/to/your/image.jpg" class="w-full h-[200px] lg:h-[250px]" style="border: 1px solid black"
-                        alt="Food Image">
+                    <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
+                        style="border: 1px solid black" alt="Food Image">
+                    <img>
                     <div class="mt-2 flex flex-col">
                         <h2 class="text-xl font-bold">Menu Item <?php echo $i + 1; ?></h2>
                         <a href="details.php?id=<?php echo $i; ?>" target="_blank" class="text-slate-300">See details</a>
@@ -229,7 +233,31 @@ if ($_SESSION['user']['role'] == 'admin') {
 
     <div class="p-4 bg-blue-600">
         <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
+        <div>
+            <?php for ($i = 0; $i < count($foods); $i++) { ?>
+                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
+                    style="border: 2px solid black;">
+                    <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
+                        style="border: 1px solid black" alt="Food Image">
+                    <div class="mt-2 flex flex-col">
+                        <h2 class="text-xl font-bold"><?= $foods[$i]['nama'] ?></h2>
+                        <a href="details.php?id=<?= $foods[$i]['id_produk'] ?>" target="_blank" class="text-slate-300">See
+                            details</a>
+                    </div>
+                    <div class="mt-2">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                            <a href="order.php?id=<?= $foods[$i]['id_produk'] ?>">Pesan</a>
+                        </button>
+                        <br>
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
     </div>
+    <?php
+
+    ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {
