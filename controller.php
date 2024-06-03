@@ -208,8 +208,26 @@ function rubah($data, $id)
 function delete($id)
 {
     $conn = bukaKonesi();
+
+    $sql = "SELECT photo FROM produk WHERE id_produk = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row) {
+        $filePath = $row['photo'];
+        // Hapus file dari sistem file jika file tersebut ada
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    // Hapus entri dari database
     mysqli_query($conn, "DELETE FROM produk WHERE id_produk = $id");
-    return mysqli_affected_rows($conn);
+
+    $affectedRows = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    return $affectedRows;
 }
+
 
 ?>

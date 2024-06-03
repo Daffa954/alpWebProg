@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_POST['logout'])) {
+if (isset($_POST['logout'])) {
     session_destroy();
     echo "<script>
     alert('logout berhasil');
@@ -11,6 +11,7 @@ if(isset($_POST['logout'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +49,11 @@ if(isset($_POST['logout'])) {
     </style>
     <title>Document</title>
 </head>
-<body>
-<!-- navbar -->
 
-<header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
+<body>
+    <!-- navbar -->
+
+    <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
                 <div class="flex items-center">
@@ -109,9 +111,30 @@ if(isset($_POST['logout'])) {
     </header>
     <!-- navbar -->
 
-    <form action="" method="post">
-    <button name="logout">logout</button>
-
+    <div class="p-4">
+        <h1 class="text-3xl font-bold">My Profile</h1>
+        <div class="p-2 rounded-lg" style="border: 2px solid black">
+            <table>
+                <tr>
+                    <td>Nama</td>
+                    <td> : </td>
+                    <td><?php echo $_SESSION['user']['nama']?></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td> : </td>
+                    <td><?php echo $_SESSION['user']['email']?></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td> : </td>
+                    <td><?php echo $_SESSION['user']['password']?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <form action="" method="post" class="p-4">
+        <button name="logout" class="bg-red-200">logout</button>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
@@ -120,7 +143,8 @@ if(isset($_POST['logout'])) {
             $("#nav-menu").toggleClass('hidden')
         });
 
-       
+
     </script>
 </body>
+
 </html>
