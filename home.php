@@ -7,7 +7,7 @@ if ($_SESSION['user']['role'] == 'admin') {
     </script>";
 }
 $foods = getAllFoods();
-
+$drinks = getAllDrinks();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -231,9 +231,10 @@ $foods = getAllFoods();
     </div>
     <!-- daftar favorit menu -->
 
-    <div class="p-4 bg-blue-600">
+    <!-- list makanan -->
+    <div class="p-4">
         <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
-        <div>
+        <div class="mt-4">
             <?php for ($i = 0; $i < count($foods); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
@@ -252,12 +253,36 @@ $foods = getAllFoods();
                     </div>
                 </div>
             <?php } ?>
-
         </div>
     </div>
-    <?php
+    <!-- list makanan -->
 
-    ?>
+    <!-- list minuman -->
+    <div class="p-4">
+        <h1 class="font-bold text-3xl">Daftar Menu Minuman</h1>
+        <div class="mt-4">
+            <?php for ($i = 0; $i < count($drinks); $i++) { ?>
+                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
+                    style="border: 2px solid black;">
+                    <img src=<?= $drinks[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
+                        style="border: 1px solid black" alt="Food Image">
+                    <div class="mt-2 flex flex-col">
+                        <h2 class="text-xl font-bold"><?= $drinks[$i]['nama'] ?></h2>
+                        <a href="details.php?id=<?= $drinks[$i]['id_produk'] ?>" target="_blank" class="text-slate-300">See
+                            details</a>
+                    </div>
+                    <div class="mt-2">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                            <a href="order.php?id=<?= $drinks[$i]['id_produk'] ?>">Pesan</a>
+                        </button>
+                        <br>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+    <!-- list minuman -->
+                
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {

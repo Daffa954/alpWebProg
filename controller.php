@@ -242,4 +242,17 @@ function getAllFoods()
     tutupKoneksi($conn);
     return $rows;
 }
+
+function getAllDrinks()
+{
+    $conn = bukaKonesi();
+    $sql = "SELECT * FROM produk WHERE kategori = 'minuman'";
+    $rows = [];
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
 ?>
