@@ -15,6 +15,16 @@ function tutupKoneksi($conn)
     mysqli_close($conn);
 }
 
+function getProduct($id) {
+    $sql = "SELECT * FROM produk WHERE id_produk = $id";
+    $conn = bukaKonesi();
+    $product= mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($product);
+    tutupKoneksi($conn);
+    return $row;
+}
+
+
 function getAllProducts()
 {
     $sql = "SELECT * FROM produk";
@@ -120,7 +130,13 @@ function register($data)
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+
+    $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $user = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($user);
     tutupKoneksi($conn);
+    return $row;
+
 }
 
 function login($data)
@@ -171,14 +187,10 @@ function rubah($data, $id)
         $photo = $oldPhoto;
     } else {
         $photo = upload();
-        if ($photo === false) {
-            // Jika upload gagal, gunakan foto lama
-            $photo = $oldPhoto;
-        }
     }
 
     //Query untuk update data di database
-    $query = "UPDATE produk SET nama = '$nama', deskripsi = '$deskripsi', kategori = '$kategori', jumlah = '$jumlah', harga = '$harga', photo = '$photo' WHERE id = $id";
+    $query = "UPDATE produk SET nama = '$nama', deskripsi = '$deskripsi', kategori = '$kategori', jumlah = '$jumlah', harga = '$harga', photo = '$photo' WHERE id_produk = $id";
 
     // Eksekusi query
     if (mysqli_query($conn, $query)) {
@@ -193,5 +205,11 @@ function rubah($data, $id)
     mysqli_close($conn);
 }
 
+function delete($id)
+{
+    $conn = bukaKonesi();
+    mysqli_query($conn, "DELETE FROM produk WHERE id_produk = $id");
+    return mysqli_affected_rows($conn);
+}
 
 ?>

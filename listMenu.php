@@ -169,8 +169,8 @@ $products = getAllProducts();
                                     <img src=<?php echo $products[$i]['photo'] ?> alt="" class="w-[230px] h-[200px]">
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="update.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                    <a href="delete.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline"> Delete</a>
+                                    <a href="update.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">Edit</a>
+                                    <a href="delete.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')"> Delete</a>
                                 </td>
                             </tr>
                         <?php } ?>
