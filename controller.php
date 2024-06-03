@@ -15,9 +15,9 @@ function tutupKoneksi($conn)
     mysqli_close($conn);
 }
 
-function getAllBooks()
+function getAllProducts()
 {
-    $sql = "SELECT * FROM buku";
+    $sql = "SELECT * FROM produk";
     $conn = bukaKonesi();
     $result = mysqli_query($conn, $sql);
     $rows = [];
@@ -154,6 +154,44 @@ function seeStock()
     $result = mysqli_fetch_assoc($sumStock);
     tutupKoneksi($conn);
     return $result;
+}
+
+function rubah($data, $id)
+{
+   
+    $conn = bukaKonesi();
+    $nama = htmlspecialchars($data["nama"]);
+    $deskripsi = htmlspecialchars($data["deskripsi"]);
+    $kategori = htmlspecialchars($data["kategori"]);
+    $jumlah = htmlspecialchars($data["jumlah"]);
+    $harga = htmlspecialchars($data["harga"]);
+    $oldPhoto = htmlspecialchars($data["oldPhoto"]);
+
+    // Cek apakah user memilih gambar baru atau tidak
+    if ($_FILES['photo']['error'] === 4) {
+        $photo = $oldPhoto;
+    } else {
+        $photo = upload();
+        if ($photo === false) {
+            // Jika upload gagal, gunakan foto lama
+            $photo = $oldPhoto;
+        }
+    }
+
+    //Query untuk update data di database
+    $query = "UPDATE produk SET nama = '$nama', deskripsi = '$deskripsi', kategori = '$kategori', jumlah = '$jumlah', harga = '$harga', photo = '$photo' WHERE id = $id";
+
+    // Eksekusi query
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Data berhasil diubah')</script>";
+    } else {
+        echo "<script>alert('Data gagal diubah: " . mysqli_error($conn) . "')</script>";
+    }
+
+
+
+    // Tutup koneksi
+    mysqli_close($conn);
 }
 
 

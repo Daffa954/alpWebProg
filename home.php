@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['user']['role'] == 'admin') {
+if ($_SESSION['user']['role'] == 'admin') {
     echo "<script>
     document.location.href = 'admin.php';
     </script>";
@@ -87,14 +87,14 @@ if($_SESSION['user']['role'] == 'admin') {
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
                         <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
-                            class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
+                                class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                            </svg>
+                        </div>
                     </div>
-                    </div>
-                    
+
                 <?php } else { ?>
                     <div>
                         <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
@@ -200,14 +200,15 @@ if($_SESSION['user']['role'] == 'admin') {
         </div>
     </div>
     <!-- carousel -->
-
+    <!-- daftar favorit menu -->
     <div class="p-4 w-full">
         <div>
             <h1 class="font-bold text-3xl">Our Favorite Foods and Drinks</h1>
         </div>
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
             <?php for ($i = 0; $i < 5; $i++) { ?>
-                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]" style="border: 2px solid black;">
+                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
+                    style="border: 2px solid black;">
                     <img src="path/to/your/image.jpg" class="w-full h-[200px] lg:h-[250px]" style="border: 1px solid black"
                         alt="Food Image">
                     <div class="mt-2 flex flex-col">
@@ -224,7 +225,11 @@ if($_SESSION['user']['role'] == 'admin') {
             <?php } ?>
         </div>
     </div>
+    <!-- daftar favorit menu -->
 
+    <div class="p-4 bg-blue-600">
+        <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {

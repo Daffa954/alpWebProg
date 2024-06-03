@@ -53,6 +53,8 @@ $total = seeStock();
 </head>
 
 <body>
+    <!-- navbar -->
+
     <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
@@ -109,8 +111,10 @@ $total = seeStock();
 
         </div>
     </header>
+<!-- navbar -->
 
-    <div class="p-4 bg-red-200 w-full flex gap-10 flex-wrap">
+<!-- detail -->
+    <div class="p-4 w-full flex gap-10 flex-wrap">
         <div class="p-2 bg-white rounded-xl lg:w-[30%] h-32 w-full flex items-center" style="border: 3px solid #27742d">
             <p class="text-xl font-semibold">Jumlah order hari ini : </p>
         </div>
@@ -124,6 +128,7 @@ $total = seeStock();
         </div>
 
     </div>
+<!-- detail -->
 
     <!-- list order -->
     <div class="p-4 bg-red-200 mt-2">
