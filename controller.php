@@ -46,7 +46,6 @@ function addProduk($data)
     }
     $sql = "INSERT INTO produk (id_produk, nama, deskripsi, kategori, jumlah, harga, photo) VALUES (NULL,'$nama', '$deskripsi', '$kategori', '$jumlah', '$harga', '$photo')";
     if (mysqli_query($conn, $sql)) {
-        echo "Data berhasil ditambahkan";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
