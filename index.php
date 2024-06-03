@@ -34,7 +34,7 @@
             box-shadow: 1px 1px 1px white;
         }
     </style>
-    <title>Document</title>
+    <title>OurFood</title>
 </head>
 <body>
      <!-- navbar -->
@@ -70,19 +70,16 @@
     <div>
         <?php
          $allProducts = getAllBooks();
-        for ($i=0; $i <count($allProducts) ; $i++) { 
-            # code...
+        for ($i=0; $i <count($allProducts); $i++) { 
+           echo $allProducts[$i]['id_produk'];
+           echo $allProducts[$i]['nama'];
+           echo $allProducts[$i]['deskripsi'];
+           echo $allProducts[$i]['kategori'];
+           echo $allProducts[$i]['jumlah'];
+           echo $allProducts[$i]['harga'];
+            ?><img src='<?= $allProducts[$i]['foto'] ?>'><?php
+            echo "<br>";
         }
-           
-            foreach ($allProducts as $product) {
-                foreach($product as $x){
-                    echo $x[0];
-                }
-                ?><img src='<?= $x ?>'>
-                    <?php
-                // echo $product[0];
-                echo "<br>";
-            }
             
         ?>
     </div>
