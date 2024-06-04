@@ -10,8 +10,8 @@ if (isset($_GET['logout'])) {
     </script>";
 }
 $total = seeStock();
-$orderToday = seeOrderToday();
-$productSoldToday = seeProductSoldToday();
+$orderToday = sumOrderToday();
+$productSoldToday = sumProductSoldToday();
 ?>
 <!DOCTYPE html>
 <html lang="en">

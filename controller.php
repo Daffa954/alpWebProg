@@ -279,7 +279,7 @@ function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
     tutupKoneksi($conn);
 }
 
-function seeOrderToday()
+function sumOrderToday()
 {
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
@@ -291,7 +291,7 @@ function seeOrderToday()
     return $result;
 }
 
-function seeProductSoldToday()
+function sumProductSoldToday()
 {
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
@@ -302,4 +302,6 @@ function seeProductSoldToday()
     tutupKoneksi($conn);
     return $result;
 }
+
+
 ?>
