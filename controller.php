@@ -160,12 +160,8 @@ function seeStock()
     $sql = "SELECT SUM(jumlah) AS total FROM produk";
     $sumStock = mysqli_query($conn, $sql);
 
-    if (!$sumStock) {
-        // Menangani kesalahan query
-        echo "Error: " . mysqli_error($conn);
-        tutupKoneksi($conn);
-        return null;
-    }
+    
+    
 
     $result = mysqli_fetch_assoc($sumStock);
     tutupKoneksi($conn);
@@ -281,5 +277,29 @@ function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
         return false;
     }
     tutupKoneksi($conn);
+}
+
+function seeOrderToday()
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT COUNT(id_memesan) AS total FROM memesan where tanggal = '$dateNow'";
+    $sumOrder = mysqli_query($conn, $sql);
+
+    $result = mysqli_fetch_assoc($sumOrder);
+    tutupKoneksi($conn);
+    return $result;
+}
+
+function seeProductSoldToday()
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT SUM(jumlah) AS total FROM memesan where tanggal = '$dateNow'";
+    $sumOrder = mysqli_query($conn, $sql);
+
+    $result = mysqli_fetch_assoc($sumOrder);
+    tutupKoneksi($conn);
+    return $result;
 }
 ?>
