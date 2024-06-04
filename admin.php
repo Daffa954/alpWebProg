@@ -124,7 +124,8 @@ $allOrder = seeAllOrder();
 
         <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
             <p class="text-xl font-semibold">Jumlah menu yang terjual hari ini :
-                <?php echo $productSoldToday['total'] ?> </p>
+                <?php echo $productSoldToday['total'] ?>
+            </p>
         </div>
 
         <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
@@ -195,22 +196,19 @@ $allOrder = seeAllOrder();
                             <td class="px-6 py-4">
                                 <?php if ($allOrder[$i]['checkout'] == 0) { ?>
                                     <p>proses</p>
-                                <?php }  else { ?>
+                                <?php } else { ?>
                                     <p>selesai</p>
-                                    <?php } ?>
-
-                                <?php echo $allOrder[$i]['checkout'] ?>
-
+                                <?php } ?>
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $allOrder[$i]['tanggal'] ?>
 
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="update.php?id=<?php echo $products[$i]["id_produk"] ?>"
+                                <a href="finish.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
                                     class="font-medium text-blue-600 hover:underline"
                                     onclick="return confirm('yakin?')">Edit</a>
-                                <a href="delete.php?id=<?php echo $products[$i]["id_produk"] ?>"
+                                <a href="delete.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
                                     class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">
                                     Delete</a>
                             </td>
