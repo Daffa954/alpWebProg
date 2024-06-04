@@ -10,6 +10,8 @@ if (isset($_GET['logout'])) {
     </script>";
 }
 $total = seeStock();
+$orderToday = seeOrderToday();
+$productSoldToday = seeProductSoldToday();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,11 +118,11 @@ $total = seeStock();
 <!-- detail -->
     <div class="p-4 w-full flex gap-10 flex-wrap">
         <div class="p-2 bg-white rounded-xl lg:w-[30%] h-32 w-full flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah order hari ini : </p>
+            <p class="text-xl font-semibold">Jumlah order hari ini : <?php echo $orderToday['total'] ?> </p>
         </div>
 
         <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah menu yang terjual hari ini : </p>
+            <p class="text-xl font-semibold">Jumlah menu yang terjual hari ini :  <?php echo $productSoldToday['total'] ?> </p>
         </div>
 
         <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">

@@ -160,12 +160,8 @@ function seeStock()
     $sql = "SELECT SUM(jumlah) AS total FROM produk";
     $sumStock = mysqli_query($conn, $sql);
 
-    if (!$sumStock) {
-        // Menangani kesalahan query
-        echo "Error: " . mysqli_error($conn);
-        tutupKoneksi($conn);
-        return null;
-    }
+    
+    
 
     $result = mysqli_fetch_assoc($sumStock);
     tutupKoneksi($conn);
@@ -195,7 +191,10 @@ function rubah($data, $id)
 
     // Eksekusi query
     if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Data berhasil diubah')</script>";
+        echo "<script>
+        alert('Data berhasil diubah');
+        document.location.href = 'listMenu.php';
+        </script>";
     } else {
         echo "<script>alert('Data gagal diubah: " . mysqli_error($conn) . "')</script>";
     }
@@ -261,25 +260,46 @@ function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
     $conn = bukaKonesi();
     $total = $jumlah * $harga;
     $tanggal = date('Y-m-d');
-    // var_dump($id_produk);
-    // var_dump($id_user);
-    // var_dump($harga);
-    // var_dump($stok);
-    // var_dump($jumlah);
-
-    $sql = "INSERT INTO memesan(id_memesan, id_user, id_menu, jumlah, harga, checkout, tanggal) VALUES ('', '$id_user','$id_produk',11, 12, 0, '')";
-
-    // $updateStock = "UPDATE produk SET jumlah = '$sisa'";
-    if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('Produk berhasil dipesan')</script>";
+    $check = "SELECT jumlah from produk WHERE id_produk = '$id_produk'";
+    $result = mysqli_query($conn, $check);
+    $resultDetail = mysqli_fetch_assoc($result);
+    if ($jumlah <= $resultDetail['jumlah']) {
+        $sql = "INSERT INTO memesan(id_memesan, id_user, id_produk, jumlah, harga, checkout, tanggal) VALUES (NULL, '$id_user','$id_produk','$jumlah', '$total', 0, '$tanggal')";
+        $sisa = $stok - $jumlah;
+        $updateStock = "UPDATE produk SET jumlah = '$sisa' where id_produk = '$id_produk'";
+        if (mysqli_query($conn, $sql) && mysqli_query($conn, $updateStock)) {
+            echo "<script>alert('Produk berhasil dipesan')</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    if (mysqli_affected_rows($conn) > 0) {
-        echo "ok";
-    } else {
-        echo "fail";
+        echo "<script>alert('Produk sudah habis')</script>";
+        return false;
     }
     tutupKoneksi($conn);
+}
+
+function seeOrderToday()
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT COUNT(id_memesan) AS total FROM memesan where tanggal = '$dateNow'";
+    $sumOrder = mysqli_query($conn, $sql);
+
+    $result = mysqli_fetch_assoc($sumOrder);
+    tutupKoneksi($conn);
+    return $result;
+}
+
+function seeProductSoldToday()
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT SUM(jumlah) AS total FROM memesan where tanggal = '$dateNow'";
+    $sumOrder = mysqli_query($conn, $sql);
+
+    $result = mysqli_fetch_assoc($sumOrder);
+    tutupKoneksi($conn);
+    return $result;
 }
 ?>
