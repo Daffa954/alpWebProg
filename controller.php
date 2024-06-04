@@ -49,7 +49,6 @@ function addProduk($data)
     $kategori = htmlspecialchars($data['kategori']);
     $jumlah = htmlspecialchars($data['jumlah']);
     $harga = htmlspecialchars($data['harga']);
-
     // Upload gambar
     $photo = upload();
     if (!$photo) {
@@ -57,6 +56,7 @@ function addProduk($data)
     }
     $sql = "INSERT INTO produk (id_produk, nama, deskripsi, kategori, jumlah, harga, photo) VALUES (NULL,'$nama', '$deskripsi', '$kategori', '$jumlah', '$harga', '$photo')";
     if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Produk berhasil ditambah')</script>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -254,5 +254,32 @@ function getAllDrinks()
     }
     tutupKoneksi($conn);
     return $rows;
+}
+
+function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
+{
+    $conn = bukaKonesi();
+    $total = $jumlah * $harga;
+    $tanggal = date('Y-m-d');
+    // var_dump($id_produk);
+    // var_dump($id_user);
+    // var_dump($harga);
+    // var_dump($stok);
+    // var_dump($jumlah);
+
+    $sql = "INSERT INTO memesan(id_memesan, id_user, id_menu, jumlah, harga, checkout, tanggal) VALUES ('', '$id_user','$id_produk',11, 12, 0, '')";
+
+    // $updateStock = "UPDATE produk SET jumlah = '$sisa'";
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Produk berhasil dipesan')</script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "ok";
+    } else {
+        echo "fail";
+    }
+    tutupKoneksi($conn);
 }
 ?>

@@ -38,7 +38,7 @@ $drinks = getAllDrinks();
             left: 0;
             right: 0;
             z-index: 99999;
-            background-color: #ffd700 !important;
+            background-color: rgba(255,215,0,0.6)!important;
             backdrop-filter: blur(5px);
             box-shadow: 1px 1px 1px white;
         }
@@ -217,7 +217,6 @@ $drinks = getAllDrinks();
                     <img>
                     <div class="mt-2 flex flex-col">
                         <h2 class="text-xl font-bold">Menu Item <?php echo $i + 1; ?></h2>
-                        <a href="details.php?id=<?php echo $i; ?>" target="_blank" class="text-slate-300">See details</a>
                     </div>
                     <div class="mt-2">
                         <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
@@ -234,7 +233,7 @@ $drinks = getAllDrinks();
     <!-- list makanan -->
     <div class="p-4">
         <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
-        <div class="mt-4">
+        <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
             <?php for ($i = 0; $i < count($foods); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
@@ -242,8 +241,7 @@ $drinks = getAllDrinks();
                         style="border: 1px solid black" alt="Food Image">
                     <div class="mt-2 flex flex-col">
                         <h2 class="text-xl font-bold"><?= $foods[$i]['nama'] ?></h2>
-                        <a href="details.php?id=<?= $foods[$i]['id_produk'] ?>" target="_blank" class="text-slate-300">See
-                            details</a>
+                        
                     </div>
                     <div class="mt-2">
                         <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
@@ -268,8 +266,7 @@ $drinks = getAllDrinks();
                         style="border: 1px solid black" alt="Food Image">
                     <div class="mt-2 flex flex-col">
                         <h2 class="text-xl font-bold"><?= $drinks[$i]['nama'] ?></h2>
-                        <a href="details.php?id=<?= $drinks[$i]['id_produk'] ?>" target="_blank" class="text-slate-300">See
-                            details</a>
+                        
                     </div>
                     <div class="mt-2">
                         <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
@@ -282,7 +279,7 @@ $drinks = getAllDrinks();
         </div>
     </div>
     <!-- list minuman -->
-                
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {
