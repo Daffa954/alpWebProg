@@ -207,8 +207,8 @@ $allOrder = seeAllOrder();
                             <td class="px-6 py-4 text-right">
                                 <a href="finish.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
                                     class="font-medium text-blue-600 hover:underline"
-                                    onclick="return confirm('yakin?')">Edit</a>
-                                <a href="delete.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
+                                    onclick="return confirm('yakin?')">proses</a>
+                                <a href="deleteOrder.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
                                     class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">
                                     Delete</a>
                             </td>
