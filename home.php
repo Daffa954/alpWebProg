@@ -235,9 +235,12 @@ $drinks = getAllDrinks();
 
     <!-- list makanan -->
     <div class="p-4">
-        <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
+    <div class="flex justify-between">
+        <h1 class="font-bold text-3xl">Daftar Menu Makanan</h1>
+        <a href="makanan.php">see more</a>
+        </div>
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
-            <?php for ($i = 0; $i < count($foods); $i++) { ?>
+            <?php for ($i = 0; $i < 5 ; $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
                     <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
@@ -260,9 +263,13 @@ $drinks = getAllDrinks();
 
     <!-- list minuman -->
     <div class="p-4">
+        <div class="flex justify-between">
         <h1 class="font-bold text-3xl">Daftar Menu Minuman</h1>
-        <div class="mt-4">
-            <?php for ($i = 0; $i < count($drinks); $i++) { ?>
+        <a href="minuman.php">see more</a>
+        </div>
+       
+        <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
+            <?php for ($i = 0; $i < 5; $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
                     <img src=<?= $drinks[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"

@@ -6,7 +6,8 @@ if ($_SESSION['user']['role'] == 'admin') {
     document.location.href = 'admin.php';
     </script>";
 }
-$finds = searchProduct($_POST['search_product']);
+$drinks = getAllDrinks();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,20 +132,20 @@ $finds = searchProduct($_POST['search_product']);
     
 
     <div class="p-4">
-        <h2 class="font-bold text-3xl">Hasil pencarian</h2>
+        <h2 class="font-bold text-3xl">Daftar Minuman</h2>
         <div class="mt-4 w-full grid lg:grid-cols-4 gap-4 grid-cols-2">
-            <?php for ($i = 0; $i < count($finds); $i++) { ?>
+            <?php for ($i = 0; $i < count($drinks); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg w-[90%]"
                     style="border: 2px solid black;">
-                    <img src=<?= $finds[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
+                    <img src=<?= $drinks[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
                         style="border: 1px solid black" alt="Food Image">
                     <div class="mt-2 flex flex-col">
-                        <h2 class="text-xl font-bold"><?= $finds[$i]['nama'] ?></h2>
+                        <h2 class="text-xl font-bold"><?= $drinks[$i]['nama'] ?></h2>
                         
                     </div>
                     <div class="mt-2">
                         <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
-                            <a href="order.php?id=<?= $finds[$i]['id_produk'] ?>">Pesan</a>
+                            <a href="order.php?id=<?= $drinks[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>
                     </div>
