@@ -3,7 +3,7 @@ session_start();
 require "controller.php";
 $product = getProduct($_GET['id']);
 if(isset($_POST['submit'])) {
-    var_dump($_POST);
+    
     rubah($_POST, $_GET['id']);
 }
 ?>

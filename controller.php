@@ -195,7 +195,10 @@ function rubah($data, $id)
 
     // Eksekusi query
     if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Data berhasil diubah')</script>";
+        echo "<script>
+        alert('Data berhasil diubah');
+        document.location.href = 'listMenu.php';
+        </script>";
     } else {
         echo "<script>alert('Data gagal diubah: " . mysqli_error($conn) . "')</script>";
     }
