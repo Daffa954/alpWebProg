@@ -1,8 +1,18 @@
 <?php
 require "controller.php";
+session_start();
 
 if(isset($_POST['submit'])) {
-    register($_POST);
+   $user = register($_POST);
+    if($user != null) {
+        $_SESSION['user'] = $user;
+        if($user['role'] == 'customer') {
+        echo " <script>
+        alert('register berhasil');
+        document.location.href = 'home.php';
+        </script>";
+        }
+    }
 }
 
 ?>

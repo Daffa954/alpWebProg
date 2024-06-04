@@ -15,6 +15,17 @@ function tutupKoneksi($conn)
     mysqli_close($conn);
 }
 
+function getProduct($id)
+{
+    $sql = "SELECT * FROM produk WHERE id_produk = $id";
+    $conn = bukaKonesi();
+    $product = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($product);
+    tutupKoneksi($conn);
+    return $row;
+}
+
+
 function getAllProducts()
 {
     $sql = "SELECT * FROM produk";
@@ -38,7 +49,6 @@ function addProduk($data)
     $kategori = htmlspecialchars($data['kategori']);
     $jumlah = htmlspecialchars($data['jumlah']);
     $harga = htmlspecialchars($data['harga']);
-
     // Upload gambar
     $photo = upload();
     if (!$photo) {
@@ -46,6 +56,7 @@ function addProduk($data)
     }
     $sql = "INSERT INTO produk (id_produk, nama, deskripsi, kategori, jumlah, harga, photo) VALUES (NULL,'$nama', '$deskripsi', '$kategori', '$jumlah', '$harga', '$photo')";
     if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Produk berhasil ditambah')</script>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -120,7 +131,13 @@ function register($data)
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+
+    $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $user = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($user);
     tutupKoneksi($conn);
+    return $row;
+
 }
 
 function login($data)
@@ -157,7 +174,7 @@ function seeStock()
 
 function rubah($data, $id)
 {
-   
+
     $conn = bukaKonesi();
     $nama = htmlspecialchars($data["nama"]);
     $deskripsi = htmlspecialchars($data["deskripsi"]);
@@ -171,14 +188,10 @@ function rubah($data, $id)
         $photo = $oldPhoto;
     } else {
         $photo = upload();
-        if ($photo === false) {
-            // Jika upload gagal, gunakan foto lama
-            $photo = $oldPhoto;
-        }
     }
 
     //Query untuk update data di database
-    $query = "UPDATE produk SET nama = '$nama', deskripsi = '$deskripsi', kategori = '$kategori', jumlah = '$jumlah', harga = '$harga', photo = '$photo' WHERE id = $id";
+    $query = "UPDATE produk SET nama = '$nama', deskripsi = '$deskripsi', kategori = '$kategori', jumlah = '$jumlah', harga = '$harga', photo = '$photo' WHERE id_produk = $id";
 
     // Eksekusi query
     if (mysqli_query($conn, $query)) {
@@ -193,5 +206,80 @@ function rubah($data, $id)
     mysqli_close($conn);
 }
 
+function deleteProduct($id)
+{
+    $conn = bukaKonesi();
 
+    $sql = "SELECT photo FROM produk WHERE id_produk = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row) {
+        $filePath = $row['photo'];
+        // Hapus file dari sistem file jika file tersebut ada
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    // Hapus entri dari database
+    mysqli_query($conn, "DELETE FROM produk WHERE id_produk = $id");
+
+    $affectedRows = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    return $affectedRows;
+}
+
+function getAllFoods()
+{
+    $conn = bukaKonesi();
+    $sql = "SELECT * FROM produk WHERE kategori = 'makanan'";
+    $rows = [];
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+function getAllDrinks()
+{
+    $conn = bukaKonesi();
+    $sql = "SELECT * FROM produk WHERE kategori = 'minuman'";
+    $rows = [];
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
+{
+    $conn = bukaKonesi();
+    $total = $jumlah * $harga;
+    $tanggal = date('Y-m-d');
+    // var_dump($id_produk);
+    // var_dump($id_user);
+    // var_dump($harga);
+    // var_dump($stok);
+    // var_dump($jumlah);
+
+    $sql = "INSERT INTO memesan(id_memesan, id_user, id_menu, jumlah, harga, checkout, tanggal) VALUES ('', '$id_user','$id_produk',11, 12, 0, '')";
+
+    // $updateStock = "UPDATE produk SET jumlah = '$sisa'";
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>alert('Produk berhasil dipesan')</script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "ok";
+    } else {
+        echo "fail";
+    }
+    tutupKoneksi($conn);
+}
 ?>
