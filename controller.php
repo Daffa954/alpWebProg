@@ -279,7 +279,7 @@ function createOrder($id_produk, $id_user, $harga, $stok, $jumlah)
     tutupKoneksi($conn);
 }
 
-function seeOrderToday()
+function sumOrderToday()
 {
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
@@ -291,7 +291,7 @@ function seeOrderToday()
     return $result;
 }
 
-function seeProductSoldToday()
+function sumProductSoldToday()
 {
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
@@ -302,4 +302,21 @@ function seeProductSoldToday()
     tutupKoneksi($conn);
     return $result;
 }
+
+function seeAllOrder() {
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT m.id_memesan, u.nama AS nama_pemesan, p.nama as menu, m.jumlah, m.harga, m.checkout, m.tanggal FROM memesan m, user u, produk p where u.id_user = m.id_user and p.id_produk = m.id_produk";
+    $rows = [];
+    $query = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($query)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+
+
+
 ?>
