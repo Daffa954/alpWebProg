@@ -12,7 +12,7 @@ if (isset($_GET['logout'])) {
 $total = seeStock();
 $orderToday = sumOrderToday();
 $productSoldToday = sumProductSoldToday();
-$allOrder = seeAllOrder();
+$allOrder = seeAllOrderToday();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +81,9 @@ $allOrder = seeAllOrder();
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
                     <li class="group"><a href="listMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Menu</a>
+                    </li>
+                    <li class="group"><a href="listOrder.php"
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Order</a>
                     </li>
                     <li class="group"><a href="AddMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
@@ -229,14 +232,7 @@ $allOrder = seeAllOrder();
             $("#nav-menu").toggleClass('hidden')
         });
 
-        $(window).scroll(function () {
-            const fixedNav = document.querySelector('header').offsetTop;
-            if (window.pageYOffset > fixedNav) {
-                document.querySelector('header').classList.add("nav-fix");
-            } else {
-                document.querySelector('header').classList.remove("nav-fix");
-            }
-        });
+       
     </script>
 </body>
 

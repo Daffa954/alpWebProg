@@ -143,7 +143,7 @@ $finds = searchProduct($_POST['search_product']);
                         
                     </div>
                     <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
                             <a href="order.php?id=<?= $finds[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>

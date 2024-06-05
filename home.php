@@ -78,7 +78,7 @@ $drinks = getAllDrinks();
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             profile</a>
                     </li>
-                    <li class="group"><a href="order.php"
+                    <li class="group"><a href="myorder.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             Order</a>
                     </li>
@@ -206,32 +206,7 @@ $drinks = getAllDrinks();
         </div>
     </div>
     <!-- carousel -->
-    <!-- daftar favorit menu -->
-    <div class="p-4 w-full">
-        <div>
-            <h1 class="font-bold text-3xl">Our Favorite Foods and Drinks</h1>
-        </div>
-        <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
-            <?php for ($i = 0; $i < 5; $i++) { ?>
-                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
-                    style="border: 2px solid black;">
-                    <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
-                        style="border: 1px solid black" alt="Food Image">
-                    <img>
-                    <div class="mt-2 flex flex-col">
-                        <h2 class="text-xl font-bold">Menu Item <?php echo $i + 1; ?></h2>
-                    </div>
-                    <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
-                            <a href="order.php?id=<?php echo $i; ?>">Pesan</a>
-                        </button>
-                        <br>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-    <!-- daftar favorit menu -->
+    
 
     <!-- list makanan -->
     <div class="p-4">
@@ -240,7 +215,7 @@ $drinks = getAllDrinks();
         <a href="makanan.php">see more</a>
         </div>
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
-            <?php for ($i = 0; $i < 5 ; $i++) { ?>
+            <?php for ($i = 0; $i < count($foods); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
                     <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
@@ -250,12 +225,13 @@ $drinks = getAllDrinks();
                         
                     </div>
                     <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
                             <a href="order.php?id=<?= $foods[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>
                     </div>
                 </div>
+                <?php if($i == 5) {break;}?>
             <?php } ?>
         </div>
     </div>
@@ -269,7 +245,7 @@ $drinks = getAllDrinks();
         </div>
        
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
-            <?php for ($i = 0; $i < 5; $i++) { ?>
+            <?php for ($i = 0; $i < count($drinks); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
                     <img src=<?= $drinks[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
@@ -279,17 +255,22 @@ $drinks = getAllDrinks();
                         
                     </div>
                     <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
                             <a href="order.php?id=<?= $drinks[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>
                     </div>
                 </div>
+                <?php if($i == 5) {break;}?>
             <?php } ?>
         </div>
     </div>
     <!-- list minuman -->
-
+<!-- footer -->
+<div class="flex justify-center items-center mt-2 w-full h-[80px] bg-[rgba(255,215,0)]">
+<p class="text-center text-xl font-bold text-white">Our Food</p>
+</div>
+<!-- footer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {

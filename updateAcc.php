@@ -1,7 +1,18 @@
 <?php
 session_start();
 require "controller.php";
-$products = getAllProducts();
+if($_SESSION['user']['role'] == 'admin') {
+    
+    echo "<script>
+        alert('Tidak bisa merubah data Admin');
+        document.location.href = 'admin.php';
+        </script>";
+        
+}else {
+    if(isset($_POST['submit'])) {
+        updateProfile($_POST, $_SESSION['user']['id_user']);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +57,7 @@ $products = getAllProducts();
 
 <body>
     <!-- navbar -->
+
     <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
@@ -69,9 +81,6 @@ $products = getAllProducts();
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
                     <li class="group"><a href="listMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Menu</a>
-                    </li>
-                    <li class="group"><a href="listOrder.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Order</a>
                     </li>
                     <li class="group"><a href="AddMenu.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
@@ -107,85 +116,40 @@ $products = getAllProducts();
     </header>
     <!-- navbar -->
 
-    <!-- table -->
+    <!-- update -->
     <div class="p-4">
-        <h1>Daftar Menu</h1>
-        <div>
+      
+            <form class="lg:w-[70%] w-full m-auto bg-white p-3 rounded-lg" method="post"  style="border: 2PX SOLID BLACK">
+            <h2 class="text-3xl font-bold mb-4">Update Profile</h2>
 
-
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                No
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Nama
-                            </th>
-                            <th scope="col" class="px-6 py-3 w-[30%]">
-                                Deskripsi
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Kategori
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Jumlah
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Harga
-                            </th>
-                            <th scope="col" class="px-6 py-3 w-[20%]">
-                                photo
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php for ($i = 0; $i < count($products); $i++) { ?>
-                            <tr class="bg-white border-b ">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                    <?php echo ($i + 1) ?>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <?php echo $products[$i]['nama'] ?>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?php echo $products[$i]['deskripsi'] ?>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?php echo $products[$i]['kategori'] ?>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?php echo $products[$i]['jumlah'] ?>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <?php echo $products[$i]['harga'] ?>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <img src=<?php echo $products[$i]['photo'] ?> alt="" class="w-[230px] h-[200px]">
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="update.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">Edit</a>
-                                    <a href="delete.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')"> Delete</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-
-
-                    </tbody>
-                </table>
-            </div>
+                <div class="mb-5">
+                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 ">
+                        nama</label>
+                    <input type="text" id="nama" name="nama" value = "<?php echo $_SESSION['user']['nama'] ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
+                    <input type="email" id="email" name="email" value = "<?php echo $_SESSION['user']['email'] ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+               
+                <div class="mb-5">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
+                    <input type="password" id="password" name="password" value = "<?php echo $_SESSION['user']['password'] ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+                <button type="submit" name="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
+            </form>
 
         </div>
     </div>
-    <!-- table -->
+    <!-- update -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {
@@ -193,7 +157,7 @@ $products = getAllProducts();
             $("#nav-menu").toggleClass('hidden')
         });
 
-
+       
     </script>
 </body>
 

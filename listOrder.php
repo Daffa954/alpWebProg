@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "controller.php";
-$products = getAllProducts();
+$allOrder = seeAllOrder();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,9 +109,8 @@ $products = getAllProducts();
 
     <!-- table -->
     <div class="p-4">
-        <h1>Daftar Menu</h1>
+        <h1>List Order</h1>
         <div>
-
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -121,22 +120,25 @@ $products = getAllProducts();
                                 No
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nama
-                            </th>
-                            <th scope="col" class="px-6 py-3 w-[30%]">
-                                Deskripsi
+                                Nomor pesanan
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Kategori
+                                nama pemesan
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Jumlah
+                                menu
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Harga
+                                jumlah 
                             </th>
-                            <th scope="col" class="px-6 py-3 w-[20%]">
-                                photo
+                            <th scope="col" class="px-6 py-3">
+                                harga
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                tanggal
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -144,33 +146,37 @@ $products = getAllProducts();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for ($i = 0; $i < count($products); $i++) { ?>
+                        <?php for ($i = 0; $i < count($allOrder); $i++) { ?>
+
                             <tr class="bg-white border-b ">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <?php echo ($i + 1) ?>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <?php echo $products[$i]['nama'] ?>
+                                    <?php echo $allOrder[$i]['id_memesan'] ?>
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $products[$i]['deskripsi'] ?>
+                                    <?php echo $allOrder[$i]['nama_pemesan'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $products[$i]['kategori'] ?>
+                                    <?php echo $allOrder[$i]['menu'] ?>
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $products[$i]['jumlah'] ?>
+                                    <?php echo $allOrder[$i]['jumlah'] ?>
 
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $products[$i]['harga'] ?>
-
+                                    <?php echo $allOrder[$i]['harga'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <img src=<?php echo $products[$i]['photo'] ?> alt="" class="w-[230px] h-[200px]">
+                                    <?php echo $allOrder[$i]['checkout'] ?>
                                 </td>
+                                <td class="px-6 py-4">
+                                    <?php echo $allOrder[$i]['tanggal'] ?>
+                                </td>
+                                
                                 <td class="px-6 py-4 text-right">
                                     <a href="update.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">Edit</a>
                                     <a href="delete.php?id=<?php echo $products[$i]["id_produk"] ?>" class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')"> Delete</a>

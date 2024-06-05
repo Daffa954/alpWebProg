@@ -74,15 +74,13 @@ if (isset($_POST['logout'])) {
                 <ul class="items-center h-full flex flex-col justify-around">
                     <li class="group"><a href="home.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
-                    <li class="group"><a href="listMenu.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Menu</a>
-                    </li>
-                    <li class="group"><a href="AddMenu.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
+                    
+                    <li class="group"><a href="profile.php"
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My Profile
                         </a>
                     </li>
-                    <li class="group"><a href="profile.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Profile
+                    <li class="group"><a href="myorder.php"
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My Order
                         </a>
                     </li>
                 </ul>
@@ -111,27 +109,40 @@ if (isset($_POST['logout'])) {
     </header>
     <!-- navbar -->
 
-    <div class="p-4">
+    <div class="p-4 lg:w-[70%] w-full m-auto flex flex-col">
         <h1 class="text-3xl font-bold">My Profile</h1>
-        <div class="p-2 rounded-lg" style="border: 2px solid black">
-            <table>
+        <div class="p-4 rounded-lg mt-4" style="border: 2px solid black">
+            <table class="text-xl ">
                 <tr>
                     <td>Nama</td>
                     <td> : </td>
-                    <td><?php echo $_SESSION['user']['nama']?></td>
+                    <td><?php echo $_SESSION['user']['nama'] ?></td>
                 </tr>
                 <tr>
                     <td>Email</td>
                     <td> : </td>
-                    <td><?php echo $_SESSION['user']['email']?></td>
+                    <td><?php echo $_SESSION['user']['email'] ?></td>
                 </tr>
-                
+
             </table>
+            <div class="mt-2 flex gap-4">
+                <?php if($_SESSION['user']['role'] != 'admin') {?>
+                <a href="updateAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-blue-100 rounded-lg">rubah data</a>
+                <a href="deleteAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-red-500 rounded-lg" onclick="confirm('yakin?')">hapus akun</a>
+
+                <?php }?>
+            </div>
+
         </div>
+
+        <form action="" method="post" class="mt-2">
+            <button name="logout" class="bg-red-500 text-white p-2 rounded-lg">logout</button>
+        </form>
+
+
+
     </div>
-    <form action="" method="post" class="p-4">
-        <button name="logout" class="bg-red-200">logout</button>
-    </form>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {

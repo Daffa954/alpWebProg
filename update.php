@@ -110,7 +110,7 @@ if(isset($_POST['submit'])) {
     <!-- navbar -->
 
     <!-- update -->
-    <div class="p-4 bg-red-200">
+    <div class="p-4">
         <h2 class="text-3xl font-bold">Update Menu</h2>
         <div class="mt-4">
             <form class="w-full bg-white p-3 rounded-lg" method="post" enctype="multipart/form-data">
