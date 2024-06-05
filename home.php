@@ -78,7 +78,7 @@ $drinks = getAllDrinks();
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             profile</a>
                     </li>
-                    <li class="group"><a href="order.php"
+                    <li class="group"><a href="myorder.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             Order</a>
                     </li>
@@ -108,8 +108,10 @@ $drinks = getAllDrinks();
         </div>
     </header>
     <!-- navbar -->
+
+    <!-- search -->
     <div class="px-4 py-2 w-full flex justify-end">
-        <form class="md:w-[45%] w-full">
+        <form class="md:w-[45%] w-full" action="search.php" method="post">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -120,14 +122,15 @@ $drinks = getAllDrinks();
                             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
-                <input type="search" id="default-search"
+                <input type="search" id="default-search" name="search_product"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                    placeholder="Search Mockups, Logos..." required />
+                     required />
                 <button type="submit"
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
         </form>
     </div>
+    <!-- search -->
 
     <!-- carousel -->
     <div class="p-4 w-full">
@@ -203,36 +206,14 @@ $drinks = getAllDrinks();
         </div>
     </div>
     <!-- carousel -->
-    <!-- daftar favorit menu -->
-    <div class="p-4 w-full">
-        <div>
-            <h1 class="font-bold text-3xl">Our Favorite Foods and Drinks</h1>
-        </div>
-        <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
-            <?php for ($i = 0; $i < 5; $i++) { ?>
-                <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
-                    style="border: 2px solid black;">
-                    <img src=<?= $foods[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
-                        style="border: 1px solid black" alt="Food Image">
-                    <img>
-                    <div class="mt-2 flex flex-col">
-                        <h2 class="text-xl font-bold">Menu Item <?php echo $i + 1; ?></h2>
-                    </div>
-                    <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
-                            <a href="order.php?id=<?php echo $i; ?>">Pesan</a>
-                        </button>
-                        <br>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-    <!-- daftar favorit menu -->
+    
 
     <!-- list makanan -->
     <div class="p-4">
-        <h1 class="font-bold text-3xl">Daftar Menu Makanan </h1>
+    <div class="flex justify-between">
+        <h1 class="font-bold text-3xl">Daftar Menu Makanan</h1>
+        <a href="makanan.php">see more</a>
+        </div>
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
             <?php for ($i = 0; $i < count($foods); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
@@ -244,12 +225,13 @@ $drinks = getAllDrinks();
                         
                     </div>
                     <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
                             <a href="order.php?id=<?= $foods[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>
                     </div>
                 </div>
+                <?php if($i == 5) {break;}?>
             <?php } ?>
         </div>
     </div>
@@ -257,8 +239,12 @@ $drinks = getAllDrinks();
 
     <!-- list minuman -->
     <div class="p-4">
+        <div class="flex justify-between">
         <h1 class="font-bold text-3xl">Daftar Menu Minuman</h1>
-        <div class="mt-4">
+        <a href="minuman.php">see more</a>
+        </div>
+       
+        <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
             <?php for ($i = 0; $i < count($drinks); $i++) { ?>
                 <div class="bg-white p-2 rounded-lg min-w-[250px] w-[250px] lg:min-w-[300px] lg:w-[300px]"
                     style="border: 2px solid black;">
@@ -269,17 +255,22 @@ $drinks = getAllDrinks();
                         
                     </div>
                     <div class="mt-2">
-                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg" onclick="return confirm('Yakin?')">
+                        <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
                             <a href="order.php?id=<?= $drinks[$i]['id_produk'] ?>">Pesan</a>
                         </button>
                         <br>
                     </div>
                 </div>
+                <?php if($i == 5) {break;}?>
             <?php } ?>
         </div>
     </div>
     <!-- list minuman -->
-
+<!-- footer -->
+<div class="flex justify-center items-center mt-2 w-full h-[80px] bg-[rgba(255,215,0)]">
+<p class="text-center text-xl font-bold text-white">Our Food</p>
+</div>
+<!-- footer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {

@@ -160,8 +160,8 @@ function seeStock()
     $sql = "SELECT SUM(jumlah) AS total FROM produk";
     $sumStock = mysqli_query($conn, $sql);
 
-    
-    
+
+
 
     $result = mysqli_fetch_assoc($sumStock);
     tutupKoneksi($conn);
@@ -295,7 +295,7 @@ function sumProductSoldToday()
 {
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
-    $sql = "SELECT SUM(jumlah) AS total FROM memesan where tanggal = '$dateNow'";
+    $sql = "SELECT SUM(jumlah) AS total FROM memesan where tanggal = '$dateNow' AND checkout = 1";
     $sumOrder = mysqli_query($conn, $sql);
 
     $result = mysqli_fetch_assoc($sumOrder);
@@ -303,10 +303,11 @@ function sumProductSoldToday()
     return $result;
 }
 
-function seeAllOrder() {
+function seeAllOrderToday()
+{
     $conn = bukaKonesi();
     $dateNow = date('Y-m-d');
-    $sql = "SELECT m.id_memesan, u.nama AS nama_pemesan, p.nama as menu, m.jumlah, m.harga, m.checkout, m.tanggal FROM memesan m, user u, produk p where u.id_user = m.id_user and p.id_produk = m.id_produk";
+    $sql = "SELECT m.id_memesan, u.nama AS nama_pemesan, p.nama as menu, m.jumlah, m.harga, m.checkout, m.tanggal FROM memesan m, user u, produk p where u.id_user = m.id_user and p.id_produk = m.id_produk and tanggal ='$dateNow'";
     $rows = [];
     $query = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($query)) {
@@ -316,7 +317,141 @@ function seeAllOrder() {
     return $rows;
 }
 
+function seeAllOrder()
+{
+    $conn = bukaKonesi();
+    $sql = "SELECT m.id_memesan, u.nama AS nama_pemesan, p.nama as menu, m.jumlah, m.harga, m.checkout, m.tanggal FROM memesan m, user u, produk p where u.id_user = m.id_user and p.id_produk = m.id_produk order by tanggal DESC";
+    $rows = [];
+    $query = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($query)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+function finishOrder($id_memesan)
+{
 
+    $conn = bukaKonesi();
+    $check = "SELECT checkout from memesan WHERE id_memesan = '$id_memesan'";
+    $result = mysqli_query($conn, $check);
+    $resultDetail = mysqli_fetch_assoc($result);
+    if ($resultDetail['checkout'] != 1) {
+        $sql = "UPDATE memesan SET checkout = 1 where id_memesan = '$id_memesan'";
+        mysqli_query($conn, $sql);
+        echo "<script>
+    alert('Produk berhasil diproses');
+    document.location.href = 'admin.php';
+    </script>";
+    } else {
+        echo "<script>
+    alert('Produk telah diproses');
+    document.location.href = 'admin.php';
+    </script>";
+        return false;
+    }
+    tutupKoneksi($conn);
+}
 
+function deleteOrder($id)
+{
+    $conn = bukaKonesi();
 
+    mysqli_query($conn, "DELETE FROM memesan WHERE id_memesan = $id");
+
+    $affectedRows = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    return $affectedRows;
+}
+
+function searchProduct($keyword)
+{
+    $conn = bukaKonesi();
+
+    $sql = "SELECT * FROM produk WHERE 
+    nama LIKE '%$keyword%' OR
+    deskripsi LIKE '%$keyword%' OR
+    kategori LIKE'%$keyword%' OR
+    jumlah LIKE'%$keyword%' OR  
+    harga LIKE'%$keyword%'
+    ";
+
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+function custOrderToday($userId)
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT m.id_memesan,p.nama, m.jumlah, m.harga , m.checkout 
+    FROM memesan m, produk p WHERE 
+    m.id_produk = p.id_produk AND m.id_user = '$userId' AND tanggal = '$dateNow';
+   
+    ";
+
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+function custOrderAll($userId)
+{
+    $conn = bukaKonesi();
+    $dateNow = date('Y-m-d');
+    $sql = "SELECT m.id_memesan,p.nama, m.jumlah, m.harga , m.tanggal
+    FROM memesan m, produk p WHERE 
+    m.id_produk = p.id_produk AND m.id_user = '$userId' ORDER BY m.tanggal;
+   
+    ";
+
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    tutupKoneksi($conn);
+    return $rows;
+}
+
+function updateProfile($data, $id)
+{
+
+    $conn = bukaKonesi();
+    $nama = htmlspecialchars($data["nama"]);
+    $email = htmlspecialchars($data["email"]);
+    $password = htmlspecialchars($data["password"]);
+    var_dump($nama);
+    $query = "UPDATE user SET nama = '$nama', password = '$password', email = '$email' WHERE id_user = $id";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>
+        alert('Data berhasil diubah');
+        document.location.href = 'profile.php';
+        </script>";
+    } else {
+        echo "<script>alert('Data gagal diubah: " . mysqli_error($conn) . "')</script>";
+    }
+    mysqli_close($conn);
+}
+
+function deleteUser($id)
+{
+    $conn = bukaKonesi();
+
+    mysqli_query($conn, "DELETE FROM user WHERE id_user = $id");
+
+    $affectedRows = mysqli_affected_rows($conn);
+    mysqli_close($conn);
+    return $affectedRows;
+}
 ?>

@@ -1,18 +1,14 @@
 <?php
-require "controller.php";
 session_start();
-
-if (isset($_GET['logout'])) {
-    session_destroy();
+require "controller.php";
+if ($_SESSION['user']['role'] == 'admin') {
     echo "<script>
-    alert('logout berhasil');
-    document.location.href = 'home.php';
+    document.location.href = 'admin.php';
     </script>";
 }
-$total = seeStock();
-$orderToday = sumOrderToday();
-$productSoldToday = sumProductSoldToday();
-$allOrder = seeAllOrderToday();
+$orders = custOrderToday($_SESSION['user']['id_user']);
+$ordersAll = custOrderAll($_SESSION['user']['id_user']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +39,14 @@ $allOrder = seeAllOrderToday();
             left: 0;
             right: 0;
             z-index: 99999;
-            background-color: #ffd700 !important;
+            background-color: rgba(255, 215, 0, 0.6) !important;
             backdrop-filter: blur(5px);
             box-shadow: 1px 1px 1px white;
         }
 
         header {
             z-index: 9999;
+            /* Ensure header has a high z-index */
         }
     </style>
     <title>Document</title>
@@ -57,7 +54,6 @@ $allOrder = seeAllOrderToday();
 
 <body>
     <!-- navbar -->
-
     <header class="w-[100%] flex items-center z-10" style="background-color: #ffd700;">
         <div class="flex items-center relative justify-between w-full p-2">
             <div class="flex flex-row gap-2">
@@ -79,20 +75,15 @@ $allOrder = seeAllOrderToday();
                 <ul class="items-center h-full flex flex-col justify-around">
                     <li class="group"><a href="home.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
-                    <li class="group"><a href="listMenu.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Menu</a>
-                    </li>
-                    <li class="group"><a href="listOrder.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Order</a>
-                    </li>
-                    <li class="group"><a href="AddMenu.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
-                        </a>
-                    </li>
                     <li class="group"><a href="profile.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Profile
-                        </a>
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
+                            profile</a>
                     </li>
+                    <li class="group"><a href="myorder.php"
+                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
+                            Order</a>
+                    </li>
+
                 </ul>
             </div>
 
@@ -119,28 +110,9 @@ $allOrder = seeAllOrderToday();
     </header>
     <!-- navbar -->
 
-    <!-- detail -->
-    <div class="p-4 w-full flex gap-10 flex-wrap">
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] h-32 w-full flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah order hari ini : <?php echo $orderToday['total'] ?> </p>
-        </div>
+    <div class="p-4">
+        <h2 class="font-bold text-3xl">Pesanan saya hari ini</h2>
 
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Jumlah menu yang terjual hari ini :
-                <?php echo $productSoldToday['total'] ?>
-            </p>
-        </div>
-
-        <div class="p-2 bg-white rounded-xl lg:w-[30%] w-full h-32 flex items-center" style="border: 3px solid #27742d">
-            <p class="text-xl font-semibold">Stok hari ini : <?php echo $total['total'] ?> </p>
-        </div>
-
-    </div>
-    <!-- detail -->
-
-    <!-- list order -->
-    <div class="p-4  mt-2">
-        <h2>Order hari ini</h2>
         <div class="mt-2">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -150,9 +122,6 @@ $allOrder = seeAllOrderToday();
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nomor order
-                        </th>
-                        <th scope="col" class="px-6 py-3 ">
-                            Nama pemesan
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Menu
@@ -167,53 +136,42 @@ $allOrder = seeAllOrderToday();
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Tanggal
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i = 0; $i < count($allOrder); $i++) { ?>
+                    <?php for ($i = 0; $i < count($orders); $i++) { ?>
                         <tr class="bg-white border-b ">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 <?php echo ($i + 1) ?>
                             </th>
                             <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['id_memesan'] ?>
+                                <?php echo $orders[$i]['id_memesan'] ?>
                             </td>
+
                             <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['nama_pemesan'] ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['menu'] ?>
+                                <?php echo $orders[$i]['nama'] ?>
 
                             </td>
                             <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['jumlah'] ?>
+                                <?php echo $orders[$i]['jumlah'] ?>
                             </td>
                             <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['harga'] ?>
+                                <?php echo $orders[$i]['harga'] ?>
                             </td>
                             <td class="px-6 py-4">
-                                <?php if ($allOrder[$i]['checkout'] == 0) { ?>
+                                <?php if ($orders[$i]['checkout'] == 0) { ?>
                                     <p>proses</p>
                                 <?php } else { ?>
                                     <p>selesai</p>
                                 <?php } ?>
                             </td>
-                            <td class="px-6 py-4">
-                                <?php echo $allOrder[$i]['tanggal'] ?>
 
-                            </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="finish.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
-                                    class="font-medium text-blue-600 hover:underline"
-                                    onclick="return confirm('yakin?')">proses</a>
-                                <a href="deleteOrder.php?id=<?php echo $allOrder[$i]["id_memesan"] ?>"
+                                <a href="deleteOrder.php?id=<?php echo $orders[$i]["id_memesan"] ?>"
                                     class="font-medium text-blue-600 hover:underline" onclick="return confirm('yakin?')">
-                                    Delete</a>
+                                    batalkan</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -223,7 +181,73 @@ $allOrder = seeAllOrderToday();
             </table>
         </div>
     </div>
-    <!-- list order -->
+
+    <div class="p-4">
+        <h2 class="font-bold text-3xl">Histori Pesanan</h2>
+
+        <div class="mt-2">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            No
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nomor order
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Menu
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jumlah
+                        </th>
+                        
+                        <th scope="col" class="px-6 py-3">
+                            Harga
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Tanggal
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php for ($i = 0; $i < count($ordersAll); $i++) { ?>
+                        <tr class="bg-white border-b ">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                <?php echo ($i + 1) ?>
+                            </th>
+                            <td class="px-6 py-4">
+                                <?php echo $ordersAll[$i]['id_memesan'] ?>
+                            </td>
+                            
+                            <td class="px-6 py-4">
+                                <?php echo $ordersAll[$i]['nama'] ?>
+
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $ordersAll[$i]['jumlah'] ?>
+                            </td>
+                            
+                            <td class="px-6 py-4">
+                                <?php echo $ordersAll[$i]['harga'] ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php echo $ordersAll[$i]['tanggal'] ?>
+                            </td>
+                    
+                        </tr>
+                    <?php } ?>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
@@ -232,7 +256,14 @@ $allOrder = seeAllOrderToday();
             $("#nav-menu").toggleClass('hidden')
         });
 
-       
+        $(window).scroll(function () {
+            const fixedNav = document.querySelector('header').offsetTop;
+            if (window.pageYOffset > fixedNav) {
+                document.querySelector('header').classList.add("nav-fix");
+            } else {
+                document.querySelector('header').classList.remove("nav-fix");
+            }
+        });
     </script>
 </body>
 
