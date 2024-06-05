@@ -5,6 +5,12 @@ if (isset($_SESSION['user'])) {
     $product = getProduct($_GET['id']);
     if(isset($_POST['submit'])) {
         createOrder($product['id_produk'], $_SESSION['user']['id_user'], $product['harga'], $product['jumlah'], $_POST['jumlah']);
+        echo "
+    <script>
+    
+    document.location.href = 'myorder.php';
+    </script>
+    ";
     }
 } else {
     echo "
@@ -85,7 +91,7 @@ if (isset($_SESSION['user'])) {
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             profile</a>
                     </li>
-                    <li class="group"><a href="order.php"
+                    <li class="group"><a href="myorder.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My
                             Order</a>
                     </li>
