@@ -111,7 +111,7 @@ $drinks = getAllDrinks();
 
     <!-- search -->
     <div class="px-4 py-2 w-full flex justify-end">
-        <form class="md:w-[45%] w-full" action="search.php" method="post">
+        <form class="md:w-[45%] w-full" action="search.php" method="get">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -210,9 +210,9 @@ $drinks = getAllDrinks();
 
     <!-- list makanan -->
     <div class="p-4">
-        <div class="flex justify-between">
+        <div class="flex">
             <h1 class="font-bold text-3xl">Daftar Menu Makanan</h1>
-            <a href="makanan.php">see more</a>
+            <a href="makanan.php" class="ml-3 p-2 bg-yellow-300 rounded-lg">See more</a>
         </div>
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">
             <?php for ($i = 0; $i < count($foods); $i++) { ?>
@@ -241,9 +241,9 @@ $drinks = getAllDrinks();
 
     <!-- list minuman -->
     <div class="p-4">
-        <div class="flex justify-between">
+        <div class="flex">
             <h1 class="font-bold text-3xl">Daftar Menu Minuman</h1>
-            <a href="minuman.php">see more</a>
+            <a href="makanan.php" class="ml-3 p-2 bg-yellow-300 rounded-lg">See more</a>
         </div>
 
         <div class="w-full flex gap-10 flex-row overflow-x-auto  mt-4">

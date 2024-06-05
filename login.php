@@ -19,6 +19,11 @@ if(isset($_POST['submit'])) {
             </script>";
         }
     }
+    else{
+        echo " <script>
+            alert('login gagal');
+            </script>";
+    }
 }
 ?>
 
