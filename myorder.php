@@ -256,14 +256,7 @@ $ordersAll = custOrderAll($_SESSION['user']['id_user']);
             $("#nav-menu").toggleClass('hidden')
         });
 
-        $(window).scroll(function () {
-            const fixedNav = document.querySelector('header').offsetTop;
-            if (window.pageYOffset > fixedNav) {
-                document.querySelector('header').classList.add("nav-fix");
-            } else {
-                document.querySelector('header').classList.remove("nav-fix");
-            }
-        });
+       
     </script>
 </body>
 

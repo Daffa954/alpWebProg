@@ -74,15 +74,29 @@ if (isset($_POST['logout'])) {
                 <ul class="items-center h-full flex flex-col justify-around">
                     <li class="group"><a href="home.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Home</a></li>
-                    
+
                     <li class="group"><a href="profile.php"
                             class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My Profile
                         </a>
                     </li>
-                    <li class="group"><a href="myorder.php"
-                            class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My Order
-                        </a>
-                    </li>
+                    <?php if ($_SESSION['user']['role'] == 'admin') { ?>
+                        <li class="group"><a href="listMenu.php"
+                                class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Menu</a>
+                        </li>
+                        <li class="group"><a href="listOrder.php"
+                                class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">List Order</a>
+                        </li>
+                        <li class="group"><a href="AddMenu.php"
+                                class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">Add Menu
+                            </a>
+                        </li>
+                    <?php } else { ?>
+                        <li class="group"><a href="myorder.php"
+                                class="text-base text-white font-bold py-2 mx-8 group-hover:text-stone-200">My Order
+                            </a>
+                        </li>
+                    <?php } ?>
+
                 </ul>
             </div>
 
@@ -126,11 +140,13 @@ if (isset($_POST['logout'])) {
 
             </table>
             <div class="mt-2 flex gap-4">
-                <?php if($_SESSION['user']['role'] != 'admin') {?>
-                <a href="updateAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-blue-100 rounded-lg">rubah data</a>
-                <a href="deleteAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-red-500 rounded-lg" onclick="confirm('yakin?')">hapus akun</a>
+                <?php if ($_SESSION['user']['role'] != 'admin') { ?>
+                    <a href="updateAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-blue-100 rounded-lg">rubah
+                        data</a>
+                    <a href="deleteAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-red-500 rounded-lg"
+                        onclick="confirm('yakin?')">hapus akun</a>
 
-                <?php }?>
+                <?php } ?>
             </div>
 
         </div>
