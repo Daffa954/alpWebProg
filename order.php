@@ -129,20 +129,23 @@ if (isset($_SESSION['user'])) {
                     style="border : 1px solid black">
             </div>
             <div>
-                <h2><?= $product['nama'] ?></h2>
+                <h2 class="text-2xl underline decoration-solid"><?= $product['nama'] ?></h2>
                 <div class="mt-2">
                     <p>Deskripsi : </p>
-                    <p><?= $product['deskripsi'] ?></p>
-                    <p>Harga : Rp.<?= $product['harga'] ?></p>
+                    <p class="pl-3">- <?= $product['deskripsi'] ?></p>
+                    <p class="text-green-500">Harga : Rp.<?= $product['harga'] ?></p>
+                    <br>
                 </div>
                 <form action="" method="post">
                   
                     <label for="helper-text" class="block mb-2 text-sm font-medium text-gray-900 ">
-                        jumlah</label>
+                        Masukkan Jumlah:</label>
                     <input type="number" id="helper-text" aria-describedby="helper-text-explanation" name="jumlah"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         >
-                    <button type="submit" name="submit">Pesan</button>
+                        <br>
+                    <button class="p-3 bg-yellow-300 rounded-2xl" type="submit" name="submit">Pesan Produk</button>
+
                 </form>
             </div>
         </div>

@@ -1,15 +1,23 @@
 <?php
 session_start();
 require "controller.php";
-if($_SESSION['user']['role'] == 'admin') {
-    
+if (!isset($_SESSION['user'])) {
+    echo "<script>
+    alert('Tidak bisa merubah data silahkan login terlebih dahulu');
+    document.location.href = 'home.php';
+    </script>";
+}
+if ($_SESSION['user']['role'] == 'admin') {
+
     echo "<script>
         alert('Tidak bisa merubah data Admin');
         document.location.href = 'admin.php';
         </script>";
-        
-}else {
-    if(isset($_POST['submit'])) {
+
+} else {
+  
+
+    if (isset($_POST['submit'])) {
         updateProfile($_POST, $_SESSION['user']['id_user']);
     }
 }
@@ -118,35 +126,35 @@ if($_SESSION['user']['role'] == 'admin') {
 
     <!-- update -->
     <div class="p-4">
-      
-            <form class="lg:w-[70%] w-full m-auto bg-white p-3 rounded-lg" method="post"  style="border: 2PX SOLID BLACK">
+
+        <form class="lg:w-[70%] w-full m-auto bg-white p-3 rounded-lg" method="post" style="border: 2PX SOLID BLACK">
             <h2 class="text-3xl font-bold mb-4">Update Profile</h2>
 
-                <div class="mb-5">
-                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 ">
-                        nama</label>
-                    <input type="text" id="nama" name="nama" value = "<?php echo $_SESSION['user']['nama'] ?>"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required />
-                </div>
-                <div class="mb-5">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
-                    <input type="email" id="email" name="email" value = "<?php echo $_SESSION['user']['email'] ?>"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required />
-                </div>
-               
-                <div class="mb-5">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
-                    <input type="password" id="password" name="password" value = "<?php echo $_SESSION['user']['password'] ?>"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required />
-                </div>
-                <button type="submit" name="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
-            </form>
+            <div class="mb-5">
+                <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 ">
+                    nama</label>
+                <input type="text" id="nama" name="nama" value="<?php echo $_SESSION['user']['nama'] ?>"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required />
+            </div>
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
+                <input type="email" id="email" name="email" value="<?php echo $_SESSION['user']['email'] ?>"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required />
+            </div>
 
-        </div>
+            <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
+                <input type="password" id="password" name="password" value="<?php echo $_SESSION['user']['password'] ?>"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required />
+            </div>
+            <button type="submit" name="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
+        </form>
+
+    </div>
     </div>
     <!-- update -->
 
@@ -157,7 +165,7 @@ if($_SESSION['user']['role'] == 'admin') {
             $("#nav-menu").toggleClass('hidden')
         });
 
-       
+
     </script>
 </body>
 

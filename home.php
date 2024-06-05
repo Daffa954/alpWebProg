@@ -89,7 +89,7 @@ $drinks = getAllDrinks();
             <div class="" style="padding-right:20px">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
-                        <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
+                        <h2>Hello! <?php echo $_SESSION['user']['nama'],"." ?></h2>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
                                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -100,7 +100,8 @@ $drinks = getAllDrinks();
 
                 <?php } else { ?>
                     <div>
-                        <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
+                        <a href="login.php" class="p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign in</a>
+                        <a href="register.php" class="ml-4 p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign up</a>
                     </div>
                 <?php } ?>
             </div>

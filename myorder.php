@@ -90,8 +90,7 @@ $ordersAll = custOrderAll($_SESSION['user']['id_user']);
             <div class="" style="padding-right:20px">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
-                        <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
-                        <div>
+                    <h2>Hello! <?php echo $_SESSION['user']['nama'],"." ?></h2>                        <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
                                 class="bi bi-person-fill" viewBox="0 0 16 16">
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
@@ -101,7 +100,8 @@ $ordersAll = custOrderAll($_SESSION['user']['id_user']);
 
                 <?php } else { ?>
                     <div>
-                        <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
+                    <a href="login.php" class="p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign in</a>
+                        <a href="register.php" class="ml-4 p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign up</a>
                     </div>
                 <?php } ?>
             </div>

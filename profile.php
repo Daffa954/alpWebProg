@@ -103,7 +103,7 @@ if (isset($_POST['logout'])) {
             <div class="" style="padding-right:20px">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
-                        <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
+                    <h2>Hello! <?php echo $_SESSION['user']['nama'],"." ?></h2>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
                                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -114,7 +114,8 @@ if (isset($_POST['logout'])) {
 
                 <?php } else { ?>
                     <div>
-                        <a href="login.php">sign in</a>/<a href="register.php">sign up</a>
+                    <a href="login.php" class="p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign in</a>
+                        <a href="register.php" class="ml-4 p-3  rounded-xl text-slate-500 border-white border-solid border-2">Sign up</a>
                     </div>
                 <?php } ?>
             </div>
@@ -141,10 +142,10 @@ if (isset($_POST['logout'])) {
             </table>
             <div class="mt-2 flex gap-4">
                 <?php if ($_SESSION['user']['role'] != 'admin') { ?>
-                    <a href="updateAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-blue-100 rounded-lg">rubah
+                    <a href="updateAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-blue-100 rounded-lg">Rubah
                         data</a>
-                    <a href="deleteAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-red-500 rounded-lg"
-                        onclick="confirm('yakin?')">hapus akun</a>
+                    <a href="deleteAcc.php?id=<?= $_SESSION['user']['id_user'] ?>" class="p-2 bg-red-500 rounded-lg text-white"
+                        onclick="confirm('yakin?')">Hapus akun</a>
 
                 <?php } ?>
             </div>
@@ -152,7 +153,7 @@ if (isset($_POST['logout'])) {
         </div>
 
         <form action="" method="post" class="mt-2">
-            <button name="logout" class="bg-red-500 text-white p-2 rounded-lg">logout</button>
+            <button name="logout" class="bg-red-500 text-white p-2 rounded-lg">Logout</button>
         </form>
 
 

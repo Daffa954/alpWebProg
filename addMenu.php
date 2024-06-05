@@ -93,7 +93,7 @@ if(isset($_POST['submit'])) {
             <div class="" style="padding-right:20px">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="flex gap-10 items-center">
-                        <h2>Hello, <?php echo $_SESSION['user']['nama'] ?></h2>
+                    <h2>Hello! <?php echo $_SESSION['user']['nama'],"." ?></h2>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#f9f5f5"
                                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -142,13 +142,13 @@ if(isset($_POST['submit'])) {
                 </select>
             </div>
             <div class="mb-5">
-                <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900">jumlah Menu</label>
+                <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900">Jumlah Menu</label>
                 <input type="number" id="jumlah"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     required name="jumlah" />
             </div>
             <div class="mb-5">
-                <label for="harga" class="block mb-2 text-sm font-medium text-gray-900">harga Menu</label>
+                <label for="harga" class="block mb-2 text-sm font-medium text-gray-900">Harga Menu</label>
                 <input type="number" id="harga"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     required name="harga" />
