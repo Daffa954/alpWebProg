@@ -122,25 +122,24 @@ $finds = searchProduct($_POST['search_product']);
                 </div>
                 <input type="search" id="default-search" name="search_product"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                     required />
+                    required />
                 <button type="submit"
                     class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
         </form>
     </div>
-    
+
 
     <div class="p-4">
         <h2 class="font-bold text-3xl">Hasil pencarian</h2>
         <div class="mt-4 w-full grid lg:grid-cols-4 gap-4 grid-cols-2">
             <?php for ($i = 0; $i < count($finds); $i++) { ?>
-                <div class="bg-white p-2 rounded-lg w-[90%]"
-                    style="border: 2px solid black;">
+                <div class="bg-white p-2 rounded-lg w-[90%]" style="border: 2px solid black;">
                     <img src=<?= $finds[$i]['photo'] ?> alt="" class="w-full h-[200px] lg:h-[250px]"
                         style="border: 1px solid black" alt="Food Image">
                     <div class="mt-2 flex flex-col">
                         <h2 class="text-xl font-bold"><?= $finds[$i]['nama'] ?></h2>
-                        
+
                     </div>
                     <div class="mt-2">
                         <button class="bg-yellow-300 lg:w-[60%] w-full p-2 rounded-lg">
@@ -152,7 +151,7 @@ $finds = searchProduct($_POST['search_product']);
             <?php } ?>
         </div>
     </div>
-
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
         $('#hamburger').click(function () {
